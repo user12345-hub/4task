@@ -10,28 +10,24 @@ app.use(express.json({ extended: true}))
 app.use('/api/auth', require('./routes/auth.routes'))
 
 if (process.env.NODE_ENV == 'production'){
-    // app.use('/', express.static(path.join(__dirname, 'client', 'build')))
-    //
-    // app.get('*', (req, res) => {
-    //     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    // })
-    app.use(express.static('client/build'))
+    app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
 }
 
-process.env.MONGO_URI = "mongodb+srv://surta:123@cluster0.nqkum.azure.mongodb.net/merndb?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 8080
 
 
 async function start(){
     try{
 
-        mongoose.connect(process.env.MONGO_URI || "mongodb+srv://surta:123@cluster0.nqkum.azure.mongodb.net/merndb?retryWrites=true&w=majority",{
+        mongoose.connect("mongodb+srv://surta:123@cluster0.nqkum.azure.mongodb.net/merndb?retryWrites=true&w=majority",{
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
         })
-
-
         app.listen(PORT, () => console.log(`App has been started ${PORT}...`))
     }
      catch(e){
