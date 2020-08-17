@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "jwtSecret": "Surta Pavel 4task",
+  "mongoUri": "mongodb+srv://surta:123@cluster0.nqkum.azure.mongodb.net/merndb?retryWrites=true&w=majority"
+}
